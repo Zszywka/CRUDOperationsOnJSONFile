@@ -1,18 +1,20 @@
-// należy zadeklarować zmienną, w której będziemy przechowywać funkcjonalności pakietu Expressa
+// zaleznosci pobrane:
 var express = require('express');
-// stworzenie aplikacji Express
+var bodyParser = require('body-parser');
+var fs = require('fs')
+// deklaracja zmiennej app
 var app = express();
+var stringifyFile;
 
-//rejestracja obsluge ROUTINGU
-// gdy aplikacja odbierze zadanie GET po wejsciu na strone domowa '/'
-app.get('/', function(req, res) {
-  // jako callbac na wystapienie tego zdarzenia wywolana jest funkcjonalności
-  // ktora gdy odpowiedz jest udana(nie wystapi blad) wyswietli "hello world"
-  res.send('Hello world');
+// pozwala uzyc body-parser(pozwala korzysta z formatu application/json)
+app.use(bodyParser.json());
+
+app.get('/getNote', function (req, res) {
+  fs.readFile('./test.json', 'utf-8', function(err, data) {
+    if (err) throw err;
+    stringifyFile = data;
+    res.send(data);
+  });
 });
 
-// Inisjacja nasluchiwania serwera na zdarzenia(wszytkie)
-// widoczne w conosli ubuntu("Przykladowa aplikacja...")
-var server = app.listen(3000, function() {
-  console.log('Przykładowa aplikacja nasłuchuje na http://localhost:3000');
-});
+app.listen(3000);

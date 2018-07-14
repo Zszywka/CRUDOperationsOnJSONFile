@@ -4,5 +4,8 @@ You should:
 -> npm install express --save
 -> npm install body-parser --sav
 -> node server.js
-2. write in the browser:
+2. assign dependencies to variables in the server.js file:
+-> var express = require('express');
+-> var bodyParser = require('body-parser');
+3. write in the browser:
 -> http://localhost:3000/
