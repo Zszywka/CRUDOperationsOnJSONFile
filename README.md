@@ -9,3 +9,7 @@ You should:
 -> var bodyParser = require('body-parser');
 3. write in the browser:
 -> http://localhost:3000/
+(check the GET request)
+-> http://localhost:3000/getNote
+(check the POST request)
+-> http://localhost:3000/updateNote/test1
