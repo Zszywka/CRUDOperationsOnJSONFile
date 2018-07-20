@@ -3,6 +3,7 @@ var bodyParser = require('body-parser');
 var fs = require('fs')
 
 var app = express();
+//global variable
 var stringifyFile;
 
 app.use(bodyParser.json());
@@ -16,7 +17,7 @@ app.use('/', function(req, res, next) {
 });
 
 app.get('/getNote', function(req, res) {
-    res.send(data);
+    res.send(stringifyFile);
 });
 
 app.post('/updateNote/:note', function(req, res) {
