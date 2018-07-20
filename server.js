@@ -7,24 +7,24 @@ var stringifyFile;
 
 app.use(bodyParser.json());
 
-app.get('/getNote', function(req, res) {
-  fs.readFile('./test.json', 'utf-8', function(err, data) {
-    if (err) throw err;
-    stringifyFile = data;
-    res.send(data);
+app.use('/', function(req, res, next) {
+  fs.readFile('./test.json', 'utf-8', function(err, data) {             
+   if (err) throw err;
+   stringifyFile = data;
+   next();
   });
 });
 
+app.get('/getNote', function(req, res) {
+    res.send(data);
+});
+
 app.post('/updateNote/:note', function(req, res) {
-  stringifyFile += req.params.note //?nie w fs.writeFile?
-  // console.log(stringifyFile);
-  // console.log("Teraz jest w POST i stringiFIle to:" + stringifyFile);
+  stringifyFile += req.params.note
   fs.writeFile('./test.json', stringifyFile, function(err) {
     if (err) throw err;
     console.log('file updated');
-    // console.log('file updated');
     res.send(stringifyFile);
-    // console.log(stringifyFile);
   })
 })
 
